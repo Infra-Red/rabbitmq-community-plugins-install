@@ -1,0 +1,17 @@
+#!/bin/bash -x
+
+set -e
+
+export PATH=/var/vcap/packages/erlang/bin:/var/vcap/packages/rabbitmq-server/bin:$PATH
+RMQ_ROOT=/var/vcap/packages/rabbitmq-server/
+RMQ_PID=/var/vcap/sys/run/rabbitmq-server/pid
+
+
+<% p('rabbitmq-plugins.list').each do |name, path|  %>
+  rabbitmqctl wait $RMQ_PID
+
+  wget <%= path %> -P $RMQ_ROOT/plugins/
+
+  rabbitmq-plugins enable <%= name %>
+
+<% end %>

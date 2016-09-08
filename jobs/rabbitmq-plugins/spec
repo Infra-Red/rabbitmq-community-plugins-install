@@ -1,0 +1,9 @@
+---
+name: "rabbitmq-plugins"
+templates:
+  bin/run.erb: "bin/run"
+  bin/job.process: "bin/job.process"
+properties:
+  rabbitmq-plugins.list:
+    default: []
+    description: "Name and download link"
